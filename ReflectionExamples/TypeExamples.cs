@@ -83,6 +83,23 @@ namespace ReflectionExamples2 {
 	    }
 
         [TestMethod]
+        public void CheckIfPropertyExists() {
+            Individual individual = new Individual() { FileAs = "Mr. Jorge Perez", FirstName = "jorge", LastName = "Perez", Address = new Address() { ZipCode = "33333" } };
+            var fileAsExists = individual.GetType().GetProperty("FileAs") != null;
+            Assert.IsTrue(fileAsExists);
+            var middleNameExists = individual.GetType().GetProperty("MiddleName") != null;
+            Assert.IsFalse(middleNameExists);
+        }
+
+        [TestMethod]
+        public void GetTypeName() {
+            Individual individual = new Individual() { FileAs = "Mr. Jorge Perez", FirstName = "jorge", LastName = "Perez", Address = new Address() { ZipCode = "33333" } };
+            var nameParts = individual.GetType().FullName.Split('.');
+            var name = nameParts[nameParts.Length - 1];
+            Assert.AreEqual(name, "Individual");
+        }
+
+        [TestMethod]
         public void TestIsAbstract(){
             var isAbstract = typeof(C).IsAbstract;
             Assert.IsTrue(isAbstract);

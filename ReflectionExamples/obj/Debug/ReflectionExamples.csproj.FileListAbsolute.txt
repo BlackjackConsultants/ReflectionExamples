@@ -28,7 +28,7 @@ C:\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\Refle
 C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\bin\Debug\ReflectionExamples2.dll
 C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\bin\Debug\ReflectionExamples2.pdb
 C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
 C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\obj\Debug\ReflectionExamples.csprojResolveAssemblyReference.cache
 C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\obj\Debug\ReflectionExamples2.dll
 C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\obj\Debug\ReflectionExamples2.pdb
+C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\obj\Debug\ReflectionExamples.csproj.CoreCompileInputs.cache
