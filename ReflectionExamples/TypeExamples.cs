@@ -57,6 +57,17 @@ namespace ReflectionExamples2 {
             }
         }
 
+        /// <summary>
+        /// Helps show difference betwee gettype() and typeof
+        /// </summary>
+        [TestMethod]
+        public void GetPropertyOfAClass() {
+            Individual individual = new Individual() { FileAs = "Mr. Jorge Perez", FirstName = "jorge", LastName = "Perez", Address = new Address() { ZipCode = "33333" } };
+            foreach (var prop in individual.GetType().GetProperties()) {
+                System.Diagnostics.Debug.WriteLine("{0}={1}", prop.Name, prop.GetValue(individual, null));
+            }
+        }
+
         [TestMethod]
         public void GetPropertyType() {
             Individual individual = new Individual() { FileAs = "Mr. Jorge Perez", FirstName = "jorge", LastName = "Perez", Address = new Address() { ZipCode = "33333" } };
