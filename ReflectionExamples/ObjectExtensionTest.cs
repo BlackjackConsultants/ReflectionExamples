@@ -37,7 +37,14 @@ namespace ReflectionExamples2 {
         [TestMethod]
         public void GenerateObjectPath() {
             var individual = CreateIndividual();
-            var path = individual.Phone.GetObjectPath(new string[1] { "Id" }, "Entity", null);
+            List<KeyValuePair<string, string>> keys = new List<KeyValuePair<string, string>>();
+            keys.Add(new KeyValuePair<string, string>("individual", "id"));
+            keys.Add(new KeyValuePair<string, string>("phone", "id"));
+            keys.Add(new KeyValuePair<string, string>("address", "id"));
+            keys.Add(new KeyValuePair<string, string>("phone", "id"));
+            keys.Add(new KeyValuePair<string, string>("state", "id"));
+            keys.Add(new KeyValuePair<string, string>("country", "id"));
+            var path = individual.Phone.GetObjectPath(keys, "Entity", null);
         }
 
         private Phone CreatePhone(Individual parent) {

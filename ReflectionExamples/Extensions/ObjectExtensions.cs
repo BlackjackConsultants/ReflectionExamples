@@ -32,7 +32,7 @@ namespace ReflectionExamples2.Extensions {
             return hashString.GetHashCode();
         }
 
-        public static StringBuilder GetObjectPath(this Object obj, string[] keys, string parent, StringBuilder path) {
+        public static StringBuilder GetObjectPath(this Object obj, List<KeyValuePair<string, string>> keys, string parent, StringBuilder path) {
             if (path == null) {
                 path = new StringBuilder();
             }
@@ -41,8 +41,9 @@ namespace ReflectionExamples2.Extensions {
             var entityProperty = obj.GetType().GetProperty(parent);
             var pathPart = new StringBuilder();
             pathPart.Append("/").Append(typeName).Append("[");
-            foreach (var key in keys) {
-                var propValue = obj.GetType().GetProperty(key).GetValue(obj);
+            var objKeys = keys.Where(x => x.Key.ToLower() == typeName.ToLower());
+            foreach (var key in objKeys) {
+                var propValue = obj.GetType().GetProperty(key.Value).GetValue(obj);
                 pathPart.Append(key).Append("=").Append(propValue);
             }
             pathPart.Append("]");
