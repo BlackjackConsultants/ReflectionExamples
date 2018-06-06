@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace ReflectionExamples2.Model {
-	public class Contact {
+	public class Contact : INode {
         public string FileAs { get; set; }
 
 		[FetchOption(FetchOptions.Address)]
@@ -15,8 +15,12 @@ namespace ReflectionExamples2.Model {
 
 	    public string FirstName { get; set; }
 	    public string LastName { get; set; }
+        public INode Entity {
+            get;
+            set ;
+        }
 
-	    public virtual string GetFileAs(){
+        public virtual string GetFileAs(){
 	        return FirstName + " " + LastName;
 	    }
     }

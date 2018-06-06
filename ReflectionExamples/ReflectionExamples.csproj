@@ -60,12 +60,14 @@
     <Compile Include="Model\A.cs" />
     <Compile Include="Model\B.cs" />
     <Compile Include="Model\C.cs" />
+    <Compile Include="Model\Country.cs" />
     <Compile Include="Model\D.cs" />
     <Compile Include="Model\Domain.cs" />
     <Compile Include="Model\E.cs" />
     <Compile Include="Model\Email.cs" />
     <Compile Include="Model\F.cs" />
     <Compile Include="Model\G.cs" />
+    <Compile Include="Model\INode.cs" />
     <Compile Include="Model\Phone.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\FetchOptionAttribute.cs" />

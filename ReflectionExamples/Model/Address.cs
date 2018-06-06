@@ -6,12 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ReflectionExamples2.Model {
-    public class Address {
+    public class Address : INode {
         public string ZipCode { get; set; }
 
         [FetchOption(FetchOptions.State)]
         public State State { get; set; }
+        public INode Entity { get; set; }
     }
-
-    public class Country{}
 }

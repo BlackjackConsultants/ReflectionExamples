@@ -1,5 +1,5 @@
 ﻿namespace ReflectionExamples2.Model {
-	public class Organization {
+	public class Organization : Contact {
 		private string fileAs;
 		public string FileAs {
 			get { return this.fileAs; }

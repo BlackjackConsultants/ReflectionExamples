@@ -5,9 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ReflectionExamples2.Model {
-    public class Phone : INode {
-        public string Number { get; set; }
-        public int Id { get; set; }
-        public INode Entity { get; set; }
+    public interface INode {
+        INode Entity { get; set; }
     }
 }
