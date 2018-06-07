@@ -38,13 +38,14 @@ namespace ReflectionExamples2 {
         public void GenerateObjectPath() {
             var individual = CreateIndividual();
             List<KeyValuePair<string, string>> keys = new List<KeyValuePair<string, string>>();
-            keys.Add(new KeyValuePair<string, string>("individual", "id"));
-            keys.Add(new KeyValuePair<string, string>("phone", "id"));
-            keys.Add(new KeyValuePair<string, string>("address", "id"));
-            keys.Add(new KeyValuePair<string, string>("phone", "id"));
-            keys.Add(new KeyValuePair<string, string>("state", "id"));
-            keys.Add(new KeyValuePair<string, string>("country", "id"));
-            var path = individual.Phone.GetObjectPath(keys, "Entity", null);
+            keys.Add(new KeyValuePair<string, string>("individual", "Id"));
+            keys.Add(new KeyValuePair<string, string>("phone", "Id"));
+            keys.Add(new KeyValuePair<string, string>("phone", "Number"));
+            keys.Add(new KeyValuePair<string, string>("address", "Id"));
+            keys.Add(new KeyValuePair<string, string>("state", "Id"));
+            keys.Add(new KeyValuePair<string, string>("country", "Id"));
+            var path = individual.Phone.GetObjectPath(keys, "Entity");
+			Assert.AreEqual("/Individual[Id=1]/Phone[Id=1&Number=305.333.3333]", path.ToString());
         }
 
         private Phone CreatePhone(Individual parent) {

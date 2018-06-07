@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,25 +33,35 @@ namespace ReflectionExamples2.Extensions {
             return hashString.GetHashCode();
         }
 
-        public static StringBuilder GetObjectPath(this Object obj, List<KeyValuePair<string, string>> keys, string parent, StringBuilder path) {
-            if (path == null) {
-                path = new StringBuilder();
-            }
+		/// <summary>
+		/// /bookstore/book[price>35]/title
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <param name="keys"></param>
+		/// <param name="parent"></param>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		public static StringBuilder GetObjectPath(this Object obj, List<KeyValuePair<string, string>> keys, string parent) {
             var nameParts = obj.GetType().FullName.Split('.');
             var typeName = nameParts[nameParts.Length - 1];
-            var entityProperty = obj.GetType().GetProperty(parent);
-            var pathPart = new StringBuilder();
+			var pathPart = new StringBuilder();
             pathPart.Append("/").Append(typeName).Append("[");
             var objKeys = keys.Where(x => x.Key.ToLower() == typeName.ToLower());
+	        int i = 0;
             foreach (var key in objKeys) {
                 var propValue = obj.GetType().GetProperty(key.Value).GetValue(obj);
-                pathPart.Append(key).Append("=").Append(propValue);
+	            if (i>0) 
+		            pathPart.Append("&");
+                pathPart.Append(key.Value).Append("=").Append(propValue);
+	            i++;
             }
             pathPart.Append("]");
-            if (entityProperty == null) {
-                return pathPart.Append(path);
+            var parentInstance = obj.GetType().GetProperty(parent).GetValue(obj);
+            if (parentInstance == null) {
+                return pathPart;
             } else {
-                return GetObjectPath(obj, keys, parent, pathPart.Append(path));
+                var parentPathPart = GetObjectPath(parentInstance, keys, parent);
+	            return parentPathPart.Append(pathPart);
             }
         }
     }
