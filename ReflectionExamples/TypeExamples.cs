@@ -39,12 +39,22 @@ namespace ReflectionExamples2 {
 		/// Helps show difference betwee gettype() and typeof
 		/// </summary>
 		[TestMethod]
-		public void InstantiatingATypeDynamicallyWithString() {
+		public void InstantiatingATypeWithTypeofandGetType() {
 			string s = "hello";
 			Type t1 = typeof(string);
 			Type t2 = s.GetType();
 			Assert.AreEqual(t1, t2, "The 2 types are not the same");
 		}
+
+        /// <summary>
+        /// Helps show difference betwee gettype() and typeof
+        /// </summary>
+        [TestMethod]
+        public void InstantiatingATypeDynamicallyWithString() {
+            string s = "hello";
+            Type t1 = Type.GetType("System.String");
+            Assert.AreEqual(t1.FullName, "System.String");
+        }
 
         /// <summary>
         /// Helps show difference betwee gettype() and typeof
