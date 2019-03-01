@@ -44,6 +44,11 @@ namespace ReflectionExamples2 {
                     if (!dictionary.ContainsKey(hashKey)) {
                         // hash not found in dictionary
                         dictionary.Add(hashKey, individual);
+                        // create a second individual to check if it exists
+                        var individual2 = CreateLazyIndividual(i);
+                        var hashKey2 = individual.GetHashCode();
+                        if (!dictionary.ContainsKey(hashKey2))
+                            Assert.Fail();
                     } else {
                         // hash not found in dictionary
                         System.Diagnostics.Debug.WriteLine("{0}. The collision occurred at {1}", new[] { ii.ToString(), i.ToString() });
