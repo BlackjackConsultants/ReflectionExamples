@@ -46,8 +46,8 @@ namespace ReflectionExamples2 {
                         dictionary.Add(hashKey, individual);
                     } else {
                         // hash not found in dictionary
-                        System.Diagnostics.Debug.WriteLine("The collision occurred at {0}", new[] { i.ToString() });
-                        ////Assert.Fail(string.Format("Collision found where i = {0}", i.ToString()));
+                        System.Diagnostics.Debug.WriteLine("{0}. The collision occurred at {1}", new[] { ii.ToString(), i.ToString() });
+                        break;
                     }
                 }
             }
@@ -80,7 +80,6 @@ namespace ReflectionExamples2 {
 
         private Individual CreateLazyIndividual(int id) {
             var individual = new Individual();
-            individual.Id = 1;
             individual.FirstName = "jorge";
             individual.LastName = "perez";
             individual.FileAs = "jp";
@@ -90,7 +89,6 @@ namespace ReflectionExamples2 {
 
         private Individual CreateIndividual() {
             var individual = new Individual();
-            individual.Id = 1;
             individual.FirstName = "jorge";
             individual.LastName = "perez";
             individual.FileAs = "jp";
