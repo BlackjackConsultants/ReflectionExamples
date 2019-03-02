@@ -2,26 +2,33 @@
 using System.Collections.Generic;
 
 namespace ReflectionExamples2.Model {
-	public class Contact : INode {
-        public string FileAs { get; set; }
+    public class Contact : INode {
+        private string _fileAs;
 
-		[FetchOption(FetchOptions.Address)]
-	    public Address Address { get; set; }
-
-		[FetchOption(FetchOptions.Phone)]
-        public Phone Phone { get; set; }
-
-	    public IList<Email> Emails { get; set; }
-
-	    public string FirstName { get; set; }
-	    public string LastName { get; set; }
-        public INode Entity {
-            get;
-            set ;
+        public string FileAs {
+            get { return _fileAs; }
+            set {
+                _fileAs = value;
+            }
         }
 
-        public virtual string GetFileAs(){
-	        return FirstName + " " + LastName;
-	    }
+        [FetchOption(FetchOptions.Address)]
+        public Address Address { get; set; }
+
+        [FetchOption(FetchOptions.Phone)]
+        public Phone Phone { get; set; }
+
+        public IList<Email> Emails { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public INode Entity {
+            get;
+            set;
+        }
+
+        public virtual string GetFileAs() {
+            return FirstName + " " + LastName;
+        }
     }
 }
