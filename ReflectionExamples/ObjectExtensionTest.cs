@@ -35,6 +35,31 @@ namespace ReflectionExamples2 {
         }
 
         [TestMethod]
+        public void CheckCollision() {
+            for (int ii = 0; ii < 100; ii++) {
+                Dictionary<int, Individual> dictionary = new Dictionary<int, Individual>();
+                for (int i = 0; i < 100000; i++) {
+                    var individual = CreateLazyIndividual(i);
+                    var hashKey = individual.GetHashCode();
+                    if (!dictionary.ContainsKey(hashKey)) {
+                        // hash not found in dictionary
+                        dictionary.Add(hashKey, individual);
+                        // create a second individual to check if it exists
+                        var individual2 = CreateLazyIndividual(i);
+                        var hashKey2 = individual.GetHashCode();
+                        if (!dictionary.ContainsKey(hashKey2))
+                            Assert.Fail();
+                    } else {
+                        // hash not found in dictionary
+                        System.Diagnostics.Debug.WriteLine("{0}. The collision occurred at {1}", new[] { ii.ToString(), i.ToString() });
+                        break;
+                    }
+                }
+            }
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
         public void GenerateObjectPath() {
             var individual = CreateIndividual();
             List<KeyValuePair<string, string>> keys = new List<KeyValuePair<string, string>>();
@@ -45,7 +70,7 @@ namespace ReflectionExamples2 {
             keys.Add(new KeyValuePair<string, string>("state", "Id"));
             keys.Add(new KeyValuePair<string, string>("country", "Id"));
             var path = individual.Phone.GetObjectPath(keys, "Entity");
-			Assert.AreEqual("/Individual[Id=1]/Phone[Id=1&Number=305.333.3333]", path.ToString());
+            Assert.AreEqual("/Individual[Id=1]/Phone[Id=1&Number=305.333.3333]", path.ToString());
         }
 
         [TestMethod]
@@ -80,7 +105,8 @@ namespace ReflectionExamples2 {
         }
 
         private Phone CreatePhone(Individual parent) {
-            var phone = new Phone             {
+            var phone = new Phone
+            {
                 Entity = parent,
                 Id = 1,
                 Number = "305.333.3333",
@@ -89,9 +115,17 @@ namespace ReflectionExamples2 {
             return phone;
         }
 
+        private Individual CreateLazyIndividual(int id) {
+            var individual = new Individual();
+            individual.FirstName = "jorge";
+            individual.LastName = "perez";
+            individual.FileAs = "jp";
+            individual.Id = id;
+            return individual;
+        }
+
         private Individual CreateIndividual() {
             var individual = new Individual();
-            individual.Id = 1;
             individual.FirstName = "jorge";
             individual.LastName = "perez";
             individual.FileAs = "jp";
@@ -103,7 +137,8 @@ namespace ReflectionExamples2 {
         }
 
         private Phone CreatePhone() {
-            return new Phone {
+            return new Phone
+            {
                 Id = 1,
                 Number = "305.555.3333"
             };
@@ -117,7 +152,7 @@ namespace ReflectionExamples2 {
             email1.EmailAddress = "jogito.suarez@yahoo.com";
             emails.Add(email1);
             return emails;
-            
+
         }
 
         private Domain CreateDomain(Email email) {

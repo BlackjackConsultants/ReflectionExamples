@@ -7,11 +7,11 @@ namespace ReflectionExamples {
 	[TestClass]
 	public class FieldInfoExamples {
 		[TestMethod]
-		public void GetValueExample() {
+		public void GetPrivateFieldValueExample() {
 			Contact contact = new Contact();
 			contact.FileAs = "Jorge Perez";
 			Type myType = typeof(Contact);
-			FieldInfo myFieldInfo = myType.GetField("fileAs", BindingFlags.NonPublic | BindingFlags.Instance);
+			FieldInfo myFieldInfo = myType.GetField("_fileAs", BindingFlags.NonPublic | BindingFlags.Instance);
 
 			// Display the string before applying SetValue to the field.
 			var value = myFieldInfo.GetValue(contact);
