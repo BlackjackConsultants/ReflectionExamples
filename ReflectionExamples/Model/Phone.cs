@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace ReflectionExamples2.Model {
     public class Phone : INode {
-        public string Number { get; set; }
+        private string number;
+
+        public string Number {
+            get { 
+                return number; 
+            }
+            set {
+                number = value;
+            }
+        }
+        public string Type { get; set; }
         public int Id { get; set; }
         public INode Entity { get; set; }
     }

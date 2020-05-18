@@ -48,11 +48,43 @@ namespace ReflectionExamples2 {
 			Assert.AreEqual("/Individual[Id=1]/Phone[Id=1&Number=305.333.3333]", path.ToString());
         }
 
+        [TestMethod]
+        public void PartialUpdate() {
+            // change phone reference class
+            Individual individual = CreateIndividual();
+            Individual sourceIndividual = new Individual();
+            sourceIndividual.Phone.Number = "999-999-9999";
+            individual.UpdateFrom(sourceIndividual, this.getIgnoreTypeList(), this.getIgnorePropertyList());
+            Assert.AreEqual(individual.Phone.Number, sourceIndividual.Phone.Number);
+            Assert.AreNotEqual(individual.Phone.Type, sourceIndividual.Phone.Type);
+            Assert.AreNotEqual(individual.Phone.Id, sourceIndividual.Phone.Id);
+            // change individual reference class
+            individual = CreateIndividual();
+            sourceIndividual = new Individual();
+            sourceIndividual.FirstName = "Juanito";
+            individual.UpdateFrom(sourceIndividual, this.getIgnoreTypeList(), this.getIgnorePropertyList());
+            Assert.AreEqual(individual.FirstName, "Juanito");
+
+        }
+
+        private IList<string> getIgnoreTypeList() {
+            var ignoreItems = new List<string>();
+            ignoreItems.Add("System.Collections.Generic.IList");
+            return ignoreItems;
+        }
+
+        private IList<string> getIgnorePropertyList() {
+            var ignoreItems = new List<string>();
+            ignoreItems.Add("Id");
+            return ignoreItems;
+        }
+
         private Phone CreatePhone(Individual parent) {
             var phone = new Phone             {
                 Entity = parent,
                 Id = 1,
-                Number = "305.333.3333"
+                Number = "305.333.3333",
+                Type = "home"
             };
             return phone;
         }

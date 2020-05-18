@@ -22,7 +22,6 @@ namespace ReflectionExamples2 {
 		public void CheckTypeOfAnInstance() {
 			Individual individual = new Individual() { FileAs = "Jorge" };
 			Organization organization = new Organization() { FileAs = "Microsoft" };
-			Assert.IsFalse(individual is Organization);
 			Assert.IsTrue(individual is Individual);
 			Assert.IsTrue(individual is Contact);
 		}
@@ -51,7 +50,6 @@ namespace ReflectionExamples2 {
         /// </summary>
         [TestMethod]
         public void InstantiatingATypeDynamicallyWithString() {
-            string s = "hello";
             Type t1 = Type.GetType("System.String");
             Assert.AreEqual(t1.FullName, "System.String");
         }

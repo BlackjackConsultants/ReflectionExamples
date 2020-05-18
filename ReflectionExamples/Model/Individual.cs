@@ -4,8 +4,11 @@ using ReflectionExamples2.Extensions;
 
 namespace ReflectionExamples2.Model {
 	public class Individual : Contact{
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public Individual() {
+            this.Phone = new Phone();
+            this.Address = new Address();
+            this.Emails = new System.Collections.Generic.List<Email>();
+        }
 	    public int Id { get; set; }
 
 	    [Example]
