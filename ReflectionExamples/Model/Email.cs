@@ -5,5 +5,7 @@
         [FetchOption(FetchOptions.Domain)]
         public Domain Domain { get; set; }
         public INode Entity { get; set; }
+
+        public int Id { get; set; }
     }
 }

@@ -75,9 +75,16 @@ namespace ReflectionExamples2 {
 
         [TestMethod]
         public void PartialUpdate() {
-            // change phone reference class
+            // change email list
             Individual individual = CreateIndividual();
             Individual sourceIndividual = new Individual();
+            sourceIndividual.Emails.Add(new Email() { EmailAddress = "lucre@gmail.com" });
+            individual.UpdateFrom(sourceIndividual, this.getIgnoreTypeList(), this.getIgnorePropertyList());
+            Assert.AreEqual(individual.Emails.Count, 2);
+            Assert.AreEqual(individual.Emails[1].EmailAddress, sourceIndividual.Emails[0].EmailAddress);
+            // change phone reference class
+            individual = CreateIndividual();
+            sourceIndividual = new Individual();
             sourceIndividual.Phone.Number = "999-999-9999";
             individual.UpdateFrom(sourceIndividual, this.getIgnoreTypeList(), this.getIgnorePropertyList());
             Assert.AreEqual(individual.Phone.Number, sourceIndividual.Phone.Number);
@@ -150,6 +157,7 @@ namespace ReflectionExamples2 {
             email1.Entity = parent;
             email1.Domain = CreateDomain(email1);
             email1.EmailAddress = "jogito.suarez@yahoo.com";
+            email1.Id = 999;
             emails.Add(email1);
             return emails;
 

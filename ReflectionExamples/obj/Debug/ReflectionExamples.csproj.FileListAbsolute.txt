@@ -39,3 +39,6 @@ C:\Users\jorge.perez\Desktop\ReflectionExamples\ReflectionExamples\obj\Debug\Ref
 C:\Users\jorge.perez\Desktop\ReflectionExamples\ReflectionExamples\obj\Debug\ReflectionExamples2.dll
 C:\Users\jorge.perez\Desktop\ReflectionExamples\ReflectionExamples\obj\Debug\ReflectionExamples2.pdb
 C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\obj\Debug\ReflectionExamples.csproj.CopyComplete
+C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\bin\Debug\Newtonsoft.Json.dll
+C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\bin\Debug\Newtonsoft.Json.xml
+C:\Users\jorge\OneDrive\jorgeprg\csharp\examples\ReflectionExamples\ReflectionExamples\ReflectionExamples\obj\Debug\ReflectionExamples.csprojAssemblyReference.cache

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -93,9 +95,22 @@ namespace ReflectionExamples2.Extensions {
                                 System.Diagnostics.Debug.WriteLine("Setting value property " + prop.Name + " BUT IS READONLY ");
                             }
                         } else {
-                            // a reference type
-                            if (!IsIgnored(ignoreTypeList, ignorePropertyList, prop)) {
-                                obj.GetType().GetProperty(prop.Name).GetValue(obj).UpdateFrom(source.GetType().GetProperty(prop.Name).GetValue(source), ignoreTypeList, ignorePropertyList);
+                            // a ref type
+                            if (prop.PropertyType.FullName.StartsWith("System.Collections.Generic.IList")) {
+                                // a list property
+                                var listType = typeof(List<>);
+                                var constructedListType = listType.MakeGenericType(prop.PropertyType);
+                                var instance = Activator.CreateInstance(constructedListType);
+                                instance = prop.GetValue(source);
+                                foreach (var sourceItem in ((System.Collections.IList)instance)) {
+                                    var objItem = findItem(sourceItem, prop.GetValue(obj) as System.Collections.IList);
+                                    objItem.UpdateFrom(sourceItem, ignoreTypeList, ignorePropertyList);
+                                }
+                            } else {
+                                // not a list property, a reference type
+                                if (!IsIgnored(ignoreTypeList, ignorePropertyList, prop)) {
+                                    obj.GetType().GetProperty(prop.Name).GetValue(obj).UpdateFrom(source.GetType().GetProperty(prop.Name).GetValue(source), ignoreTypeList, ignorePropertyList);
+                                }
                             }
                         }
                     }
@@ -103,6 +118,24 @@ namespace ReflectionExamples2.Extensions {
             } else {
                 System.Diagnostics.Debug.WriteLine("Updating type " + obj.GetType().FullName + ". BUT SOURCE IS NULL");
             }
+        }
+
+        /// <summary>
+        /// finds an item in destination list (this) or creates it and returns it.
+        /// </summary>
+        /// <param name="sourceItem"></param>
+        /// <param name="objList"></param>
+        /// <returns></returns>
+        private static object findItem(object sourceItem, System.Collections.IList objList) {
+            foreach (var item in objList) {
+                if (item.GetType().GetProperty("Id").GetValue(item) == sourceItem.GetType().GetProperty("Id").GetValue(sourceItem)) {
+                    return item;
+                }
+            }
+            // return a cloned item.
+            var objItem = Activator.CreateInstance(sourceItem.GetType());
+            objList.Add(objItem);
+            return objList[objList.Count - 1];
         }
 
         /// <summary>
