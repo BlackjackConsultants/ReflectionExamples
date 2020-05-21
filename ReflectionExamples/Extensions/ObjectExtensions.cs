@@ -126,9 +126,15 @@ namespace ReflectionExamples2.Extensions {
         /// <param name="sourceItem"></param>
         /// <param name="objList"></param>
         /// <returns></returns>
+        /// <summary>
+        /// finds an item in destination list (this) or creates it and returns it.
+        /// </summary>
+        /// <param name="sourceItem"></param>
+        /// <param name="objList"></param>
+        /// <returns></returns>
         private static object findItem(object sourceItem, System.Collections.IList objList) {
             foreach (var item in objList) {
-                if (item.GetType().GetProperty("Id").GetValue(item) == sourceItem.GetType().GetProperty("Id").GetValue(sourceItem)) {
+                if ((int)item.GetType().GetProperty("Id").GetValue(item) == (int)sourceItem.GetType().GetProperty("Id").GetValue(sourceItem)) {
                     return item;
                 }
             }
@@ -137,6 +143,7 @@ namespace ReflectionExamples2.Extensions {
             objList.Add(objItem);
             return objList[objList.Count - 1];
         }
+
 
         /// <summary>
         /// returns true if item should be ignored.
@@ -159,6 +166,7 @@ namespace ReflectionExamples2.Extensions {
             return retVal;
         }
 
+
         /// <summary>
         /// returns true if is read only
         /// </summary>
@@ -169,5 +177,6 @@ namespace ReflectionExamples2.Extensions {
             bool readOnly = !prop.CanWrite || (attrib != null && attrib.IsReadOnly);
             return readOnly;
         }
+
     }
 }
