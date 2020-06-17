@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace ReflectionExamples2.Model {
     public class Contact : INode {
+        public Contact() {
+            this.Emails = new List<Email>();
+        }
         private string _fileAs;
 
         public string FileAs {

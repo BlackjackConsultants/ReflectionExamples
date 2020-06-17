@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ReflectionExamples2.Model;
@@ -47,6 +48,28 @@ namespace ReflectionExamples {
 			int radius = 3;
 			string typeString = (radius * radius * Math.PI).GetType().ToString();
 			Assert.AreEqual("System.Double",typeString);
+		}
+
+
+		[TestMethod]
+		public void GetIndexPropertyValue() {
+			object theValue = null;
+			var contact = new Contact();
+			contact.FirstName = "jorge";
+			contact.Emails.Add(new Email() { Id = 1, EmailAddress = "jorgepires@gmail.com" });
+
+			PropertyInfo propInfoList = contact.GetType().GetProperty("Emails"); //.GetValue(c.Emails);
+			IList emails = propInfoList.GetValue(contact, null) as IList;
+			Assert.IsNotNull(emails);
+            PropertyInfo emailAddressPropInfo = propInfoList.PropertyType.GetGenericArguments()[0].GetProperty("EmailAddress");
+
+            foreach (var email in emails) {
+                theValue = emailAddressPropInfo.GetValue(email, null);
+				Assert.AreEqual(theValue, "jorgepires@gmail.com");
+                emailAddressPropInfo.SetValue(email, "jorgepires@yahoo.com", null);  // <-- set to an appropriate value
+				Assert.AreEqual(((Email)email).EmailAddress, "jorgepires@yahoo.com");
+			}
+
 		}
 	}
 }
